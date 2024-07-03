@@ -2,7 +2,6 @@ package main
 
 import (
 	"Todo-list/internal/handlers"
-	"Todo-list/internal/models"
 	"context"
 	"github.com/gorilla/mux"
 	"log"
@@ -15,18 +14,10 @@ import (
 
 func main() {
 
-	db, err := initializeDB()
-	if err != nil {
-		log.Fatal("Could not connect to the database: ", err)
-	}
-	defer db.Close()
-
-	taskModel := models.TaskModel{DB: db}
-
 	router := mux.NewRouter()
 
 	router.HandleFunc("/health-check", handlers.HealthCheck).Methods(http.MethodGet)
-	router.HandleFunc("/api/todo-list/tasks", handlers.CreateTaskHandler(&taskModel)).Methods(http.MethodPost)
+	router.HandleFunc("/api/todo-list/tasks", handlers.CreateTaskHandler).Methods(http.MethodPost)
 	router.HandleFunc("/api/todo-list/tasks/{id:[0-9]+}", handlers.UpdateTaskHandler).Methods(http.MethodPut)
 	router.HandleFunc("/api/todo-list/tasks/{id:[0-9]+}", handlers.DeleteTaskHandler).Methods(http.MethodDelete)
 	router.HandleFunc("/api/todo-list/tasks/{id:[0-9]+}/done", handlers.MarkTaskDone).Methods(http.MethodPut)
