@@ -78,8 +78,8 @@ Task
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/FIFSAK/Hl-task1
-   cd Hl-task1
+   git clone https://github.com/FIFSAK/Todo-list
+   cd Todo-list
    ```
 2. **Build the Docker images:**
    ```bash
